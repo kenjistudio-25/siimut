@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Informasi Manajemen Mutasi Murid | Cabdin IV Bangka Barat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 10px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* bag header*/
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.2rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        .logo-text h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .user-profile:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* Hero */
+        .hero-section {
+            background: linear-gradient(rgba(67, 97, 238, 0.85), rgba(114, 9, 183, 0.9)), 
+                        url('hero1.png');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .hero-text {
+            flex: 1;
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        .hero-text h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            animation: fadeInRight 1s ease-out;
+        }
+
+        .hero-illustration {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* konten di hero */
+        .dashboard {
+            padding: 0 0 50px;
+        }
+
+        .welcome-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .welcome-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .welcome-header h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .date-display {
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .stats-cards {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--box-shadow);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: var(--transition);
+            border-top: 5px solid var(--primary);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card.masuk {
+            border-top-color: var(--success);
+        }
+
+        .stat-card.keluar {
+            border-top-color: var(--accent);
+        }
+
+        .stat-card.pending {
+            border-top-color: #ff9e00;
+        }
+
+        .stat-icon {
+            width: 70px;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .stat-icon i {
+            font-size: 1.7rem;
+            color: #212529;
+        }
+        
+
+        .stat-icon.masuk {
+            background: linear-gradient(135deg, var(--success), #2a9d8f);
+        }
+
+        .stat-icon.keluar {
+            background: linear-gradient(135deg, var(--accent), #f15bb5);
+        }
+
+        .stat-icon.total {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            width: 70px;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+        }
+
+        .stat-icon.pending {
+            background: linear-gradient(135deg, #ff9e00, #ffaa00);
+        }
+
+        .stat-info h3 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .stat-info p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* baginan carousel ma men */
+        .carousel-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .carousel-title {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            background: linear-gradient(135deg, #e6cfa4, #e9ecef);
+            padding: 20px;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-step {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .carousel-slide-title {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .carousel-illustration {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            background: white;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .carousel-illustration i {
+            font-size: 4rem;
+            color: var(--primary);
+        }
+
+        .carousel-description {
+            font-size: 1rem;
+            text-align: center;
+            color: var(--gray);
+            max-width: 600px;
+            line-height: 1.6;
+            padding: 0 10px;
+        }
+
+        .carousel-navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            gap: 15px;
+        }
+
+        .carousel-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            box-shadow: 0 3px 10px rgba(67, 97, 238, 0.3);
+        }
+
+        .carousel-btn:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+            transform: scale(1.05);
+        }
+
+        .carousel-btn:disabled {
+            background: var(--light-gray);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .carousel-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ddd;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .carousel-indicator.active {
+            background-color: var(--primary);
+            transform: scale(1.2);
+        }
+
+        .carousel-step-counter {
+            font-size: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        /* akordeon... anjir ngenyut pale*/
+        .accordion-section {
+            background: rgb(240, 215, 169);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .accordion-item {
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            width: 100%;
+            padding: 15px 20px;
+            background: white;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--dark);
+            transition: var(--transition);
+            text-align: left;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .accordion-header:hover {
+            background-color: #f8f9fa;
+        }
+
+        .accordion-header.active {
+            background-color: #e7f1ff; 
+            color: var(--primary);
+            box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+        }
+
+        .accordion-header i {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.active i {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: white;
+        }
+
+        .accordion-body {
+            padding: 20px;
+            border-top: 1px solid var(--light-gray);
+            color: #fff;
+            font-size: 0.95rem;
+            background-color: #031049;
+        }
+
+        /* templet akordeon bos kuh  */
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .template-card {
+            background: transparent;
+            border: 2px solid #FFD700;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            background: #fff;
+        }
+
+        .template-card:hover .template-title {
+            color: #000;
+        }
+
+        .template-card:hover .template-icon {
+            color: #607d8b;
+            background: #f8f9fa;
+            border-color: transparent;
+        }
+
+        .template-icon {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 15px;
+            background: transparent;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .template-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #fff;
+            line-height: 1.4;
+            transition: var(--transition);
+        }
+
+        .template-btn {
+            font-size: 0.85rem;
+            padding: 8px 15px;
+            width: 100%;
+            border-radius: 5px;
+            background: var(--light-gray);
+            color: var(--dark);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .template-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* bagian CP*/
+        .contact-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            align-items: start;
+        }
+
+        .contact-info-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+
+        .contact-info-item:hover .contact-icon {
+            background: var(--primary);
+            color: white;
+        }
+
+        .contact-details h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .contact-details p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+
+        .map-container {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            height: 320px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--light-gray);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 25px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-logo i {
+            font-size: 1.8rem;
+            color: var(--success);
+        }
+
+        .copyright {
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+
+        /* animasi */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* footer lagih*/
+        .footer-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .footer-agency {
+            font-size: 0.85rem;
+            color: var(--light-gray);
+            margin-top: 5px;
+            line-height: 1.4;
+            font-weight: 300;
+        }
+
+        .footer-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-icon {
+            width: 38px;
+            height: 38px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            color: white;
+        }
+
+        /* media */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-text h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-text p {
+                margin: 0 auto 30px;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .stats-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .action-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .hero-section {
+                padding: 60px 0;
+            }
+            
+            .hero-text h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-text p {
+                font-size: 1.1rem;
+            }
+            
+            .welcome-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .stats-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .footer-right {
+                align-items: center;
+            }
+            
+            .footer-logo {
+                flex-direction: column;
+            }
+
+            .carousel-section {
+                padding: 25px;
+            }
+
+            .carousel-illustration {
+                height: 250px;
+            }
+
+            .carousel-illustration i {
+                font-size: 3rem;
+            }
+        }
+
+        /* bag form login bos */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .login-card {
+            background: white;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .login-card {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .close-modal:hover {
+            color: var(--accent);
+            transform: rotate(90deg);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        /* slider login */
+        .login-tabs {
+            position: relative;
+            display: flex;
+            background: #f1f3f5;
+            border-radius: 50px;
+            padding: 5px;
+            margin-bottom: 30px;
+        }
+
+        .tab-bg {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: calc(50% - 5px);
+            height: calc(100% - 10px);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50px;
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 1;
+        }
+
+        .tab-item {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            cursor: pointer;
+            z-index: 2;
+            font-weight: 600;
+            color: var(--gray);
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .tab-item.active {
+            color: white;
+        }
+
+        /* form input login */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .form-container {
+            overflow: hidden;
+        }
+
+        .forms-slider {
+            display: flex;
+            width: 200%;
+            transition: transform 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+        }
+
+        .login-form {
+            width: 50%;
+            padding: 5px;
+        }
+
+        .btn-block {
+            width: 100%;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 40px 0;
+            }
+            
+            .hero-text h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .welcome-section, .recent-activity, .stat-card {
+                padding: 20px;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.3rem;
+            }
+            
+            .stat-info h3 {
+                font-size: 1.8rem;
+            }
+
+            .carousel-section {
+                padding: 20px;
+            }
+
+            .carousel-slide {
+                padding: 15px;
+            }
+
+            .carousel-step {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            .carousel-slide-title {
+                font-size: 1.3rem;
+            }
+
+            .carousel-illustration {
+                height: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="logo.png" alt="Logo" style="height:48px;width:48px;object-fit:contain;display:block;" />
+                    </div>
+                    <div class="logo-text">
+                        <h1>Sistem Informasi Manajemen Mutasi Murid</h1>
+                        <p>Cabang Dinas Wilayah IV - Bangka Barat - Provinsi Kepulauan Bangka Belitung</p>
+                    </div>
+                </div>
+                <div class="user-profile">
+                    <button id="loginBtn" class="btn-primary" style="padding: 8px 24px; font-size: 1rem; border-radius: 50px;">Login</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>Kelola Mutasi Siswa dengan Mudah dan Efisien</h2>
+                    <p>Sistem terintegrasi untuk mengelola proses perpindahan siswa antar sekolah. Pantau mutasi masuk, keluar, dan pindah.</p>
+                    <div class="hero-buttons">
+                        
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="hero-illustration">
+                        
+                        <svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="50" y="100" width="80" height="80" fill="#4CC9F0" opacity="0.8"/>
+                            <rect x="60" y="60" width="60" height="40" fill="#4361EE" opacity="0.9"/>
+                            <rect x="85" y="100" width="20" height="30" fill="#F8F9FA"/>
+                            <circle cx="90" cy="115" r="3" fill="#4361EE"/>
+                            <circle cx="100" cy="115" r="3" fill="#4361EE"/>
+                            
+                            <rect x="270" y="100" width="80" height="80" fill="#7209B7" opacity="0.8"/>
+                            <rect x="280" y="60" width="60" height="40" fill="#4361EE" opacity="0.9"/>
+                            <rect x="305" y="100" width="20" height="30" fill="#F8F9FA"/>
+                            <circle cx="310" cy="115" r="3" fill="#4361EE"/>
+                            <circle cx="320" cy="115" r="3" fill="#4361EE"/>
+                            
+                            <path d="M130 140 L270 140" stroke="white" stroke-width="3" stroke-dasharray="5,5"/>
+                            
+                            <circle cx="160" cy="140" r="15" fill="#F72585"/>
+                            <circle cx="160" cy="130" r="10" fill="#F8F9FA"/>
+                            <path d="M155 125 L165 125" stroke="#212529" stroke-width="1"/>
+                            <path d="M160 140 L160 155 L155 160" stroke="#F8F9FA" stroke-width="2"/>
+                            <path d="M160 155 L165 160" stroke="#F8F9FA" stroke-width="2"/>
+                            <path d="M155 135 L150 145" stroke="#F8F9FA" stroke-width="2"/>
+                            <path d="M165 135 L170 145" stroke="#F8F9FA" stroke-width="2"/>
+                            
+                            <path d="M250 135 L260 140 L250 145 Z" fill="white"/>
+                            
+                            <circle cx="180" cy="140" r="3" fill="white" class="moving-dot" style="animation-delay: 0s"/>
+                            <circle cx="200" cy="140" r="3" fill="white" class="moving-dot" style="animation-delay: 0.2s"/>
+                            <circle cx="220" cy="140" r="3" fill="white" class="moving-dot" style="animation-delay: 0.4s"/>
+                            <circle cx="240" cy="140" r="3" fill="white" class="moving-dot" style="animation-delay: 0.6s"/>
+                            
+                            <text x="90" y="210" fill="white" font-size="12" font-weight="bold">SEKOLAH ASAL</text>
+                            <text x="290" y="210" fill="white" font-size="12" font-weight="bold">SEKOLAH TUJUAN</text>
+                            <text x="190" y="120" fill="white" font-size="14" font-weight="bold">PROSES MUTASI</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- bagian main konten -->
+    <main class="dashboard">
+        <div class="container">
+            <section class="welcome-section">
+                <div class="welcome-header">
+                    <h2>Selamat Datang di Sistem Informasi Manajemen Mutasi Murid</h2>
+                    <div class="date-display">
+                        <i class="far fa-calendar-alt"></i>
+                        <span id="current-date"></span>
+                    </div>
+                </div>
+                <p>Sistem ini membantu Anda mengelola mutasi siswa (masuk, keluar, dan pindah) dengan mudah dan efisien.</p>
+            </section>
+
+            <!-- bagian card -->
+            <div class="stats-cards">
+                <div class="stat-card total">
+                    <div class="stat-icon total">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>2</h3>
+                        <p>Total Sekolah (SMA & SMK)</p>
+                    </div>
+                </div>
+                <div class="stat-card siswa">
+                    <div class="stat-icon siswa">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>1,245</h3>
+                        <p>Total Siswa Aktif</p>
+                    </div>
+                </div>
+                <div class="stat-card mutasi">
+                    <div class="stat-icon mutasi">
+                        <i class="fas fa-random"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>50</h3>
+                        <p>Total Mutasi</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- karusel alur mutasi -->
+            <section class="carousel-section">
+                <h2 class="carousel-title">Alur Proses Mutasi Peserta Didik</h2>
+                <div class="carousel-container">
+                    <div class="carousel">
+                        <!-- Slide 1 -->
+                        <div class="carousel-slide">
+                            <div class="carousel-step">1</div>
+                            <h3 class="carousel-slide-title">Pengajuan dari Orang Tua ke Sekolah Tujuan</h3>
+                            <div class="carousel-illustration">
+                                <img src="alur1.png" alt="Ilustrasi Alur 1" style="width: 100%; height: 100%; object-fit: contain;">
+                            </div>
+                            <p class="carousel-description">
+                                Orang tua/wali mengajukan permohonan mutasi ke sekolah tujuan dengan melampirkan dokumen yang diperlukan seperti surat permohonan mutasi, rapor, dan dokumen pendukung lainnya.
+                            </p>
+                        </div>
+                        
+                        <!-- Slide 2 -->
+                        <div class="carousel-slide">
+                            <div class="carousel-step">2</div>
+                            <h3 class="carousel-slide-title">Permohonan Mutasi ke Sekolah Asal</h3>
+                            <div class="carousel-illustration">
+                                <img src="alur2.png" alt="Ilustrasi Alur 2" style="width: 100%; height: 100%; object-fit: contain;">
+                            </div>
+                            <p class="carousel-description">
+                                Sekolah tujuan mengirimkan permohonan mutasi ke sekolah asal untuk meminta persetujuan dan data peserta didik yang akan dimutasi.
+                            </p>
+                        </div>
+                        
+                        <!-- Slide 3 -->
+                        <div class="carousel-slide">
+                            <div class="carousel-step">3</div>
+                            <h3 class="carousel-slide-title">Persiapan Sekolah Asal & Cabang Dinas</h3>
+                            <div class="carousel-illustration">
+                                <img src="alur3.png" alt="Ilustrasi Alur 3" style="width: 100%; height: 100%; object-fit: contain;">
+                            </div>
+                            <p class="carousel-description">
+                                Sekolah asal mempersiapkan dokumen peserta didik dan mengajukan permohonan mutasi ke Cabang Dinas Pendidikan setempat untuk mendapatkan persetujuan.
+                            </p>
+                        </div>
+                        
+                        <!-- Slide 4 -->
+                        <div class="carousel-slide">
+                            <div class="carousel-step">4</div>
+                            <h3 class="carousel-slide-title">Pengajuan ke Cabang Dinas</h3>
+                            <div class="carousel-illustration">
+                                <img src="alur4.png" alt="Ilustrasi Alur 4" style="width: 100%; height: 100%; object-fit: contain;">
+                            </div>
+                            <p class="carousel-description">
+                                Sekolah asal mengajukan dokumen mutasi ke Cabang Dinas Pendidikan wilayahnya untuk diverifikasi dan diproses lebih lanjut sesuai dengan peraturan yang berlaku.
+                            </p>
+                        </div>
+                        
+                        <!-- Slide 5 -->
+                        <div class="carousel-slide">
+                            <div class="carousel-step">5</div>
+                            <h3 class="carousel-slide-title">Penerbitan Dokumen Verifikasi Mutasi</h3>
+                            <div class="carousel-illustration">
+                                <img src="alur5.png" alt="Ilustrasi Alur 5" style="width: 100%; height: 100%; object-fit: contain;">
+                            </div>
+                            <p class="carousel-description">
+                                Cabang Dinas Pendidikan menerbitkan dokumen verifikasi mutasi yang menjadi dasar legalitas proses mutasi peserta didik dari sekolah asal ke sekolah tujuan.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-navigation">
+                        <button class="carousel-btn prev-btn" aria-label="Langkah sebelumnya">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        
+                        <div class="carousel-indicators">
+                            <div class="carousel-indicator active" data-slide="0"></div>
+                            <div class="carousel-indicator" data-slide="1"></div>
+                            <div class="carousel-indicator" data-slide="2"></div>
+                            <div class="carousel-indicator" data-slide="3"></div>
+                            <div class="carousel-indicator" data-slide="4"></div>
+                        </div>
+                        
+                        <button class="carousel-btn next-btn" aria-label="Langkah berikutnya">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="carousel-step-counter">
+                        Langkah <span id="carousel-current-step">1</span> dari 5
+                    </div>
+                </div>
+            </section>
+
+            <!-- Grafik  -->
+            <div class="chart-section" style="background:var(--dark);border-radius:var(--border-radius);padding:30px;margin-bottom:30px;box-shadow:var(--box-shadow);">
+                <h3 style="margin-bottom:20px;color:var(--light);font-size:1.2rem;">Grafik Mutasi Siswa per Bulan (1 Tahun Terakhir)</h3>
+                <canvas id="mutasiChart" height="100"></canvas>
+            </div>
+
+            <!-- Accordion   Mutasi -->
+            <section class="accordion-section">
+                <h2 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 25px;">Contoh Blanko Mutasi</h2>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span><i class="fas fa-folder-open" style="margin-right: 10px; color: var(--primary);"></i> Koleksi Template Dokumen Mutasi</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <div class="template-grid">
+                                    <!-- Card 1 -->
+                                    <div class="template-card">
+                                        <div class="template-icon"><i class="far fa-file-alt"></i></div>
+                                        <h4 class="template-title">Surat Permohonan Mutasi dari orangtua/wali ke sekolah tujuan</h4>
+                                        <button class="template-btn"><i class="fas fa-download"></i> Unduh</button>
+                                    </div>
+                                    
+                                    <!-- Card 2 -->
+                                    <div class="template-card">
+                                        <div class="template-icon"><i class="fas fa-school"></i></div>
+                                        <h4 class="template-title">SURAT KETERANGAN FORMASI DAN PERSETUJUAN</h4>
+                                        <button class="template-btn"><i class="fas fa-download"></i> Unduh</button>
+                                    </div>
+                                    
+                                    <!-- Card 3 -->
+                                    <div class="template-card">
+                                        <div class="template-icon"><i class="fas fa-building"></i></div>
+                                        <h4 class="template-title">Surat pernyataan pengunduran diri/mutasi peserta didik</h4>
+                                        <button class="template-btn"><i class="fas fa-download"></i> Unduh</button>
+                                    </div>
+
+                                    <!-- Card 4 -->
+                                    <div class="template-card">
+                                        <div class="template-icon"><i class="fas fa-clipboard-check"></i></div>
+                                        <h4 class="template-title">SURAT KETERANGAN PINDAH/MUTASI KELUAR</h4>
+                                        <button class="template-btn"><i class="fas fa-download"></i> Unduh</button>
+                                    </div>
+
+                                    <!-- Card 5 -->
+                                    <div class="template-card">
+                                        <div class="template-icon"><i class="fas fa-user-graduate"></i></div>
+                                        <h4 class="template-title">SURAT PENGANTAR</h4>
+                                        <button class="template-btn"><i class="fas fa-download"></i> Unduh</button>
+                                    </div>
+
+                                    <!-- Card 6 -->
+                                    <div class="template-card">
+                                        <div class="template-icon"><i class="fas fa-envelope-open-text"></i></div>
+                                        <h4 class="template-title">SURAT KETERANGAN BERKELAKUAN BAIK</h4>
+                                        <button class="template-btn"><i class="fas fa-download"></i> Unduh</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact & Maps  -->
+            <section class="contact-section">
+                <h2 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 25px;">Hubungi Kami</h2>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Contact Person</h4>
+                                <p>+62 812-3456-7890 (Admin Mutasi)</p>
+                                <p>+62 819-8765-4321 (Layanan Informasi)</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Alamat Kantor</h4>
+                                <p>Cabang Dinas Pendidikan Wilayah IV<br>
+                                Jl. Jenderal Sudirman, Daya Baru, Kec. Muntok<br>
+                                Kabupaten Bangka Barat, Kepulauan Bangka Belitung</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Email</h4>
+                                <p>cabdinwil4@babelprov.go.id</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3987.985868297764!2d105.166667!3d-2.066667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e230d0000000001%3A0x0!2sMuntok!5e0!3m2!1sid!2sid!4v1600000000000!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Modal buat Login  -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="login-card">
+            <div class="close-modal" id="closeModal">&times;</div>
+            
+            <div class="login-header">
+                <h3>Selamat Datang</h3>
+                <p>Silahkan login sesuai hak akses Anda</p>
+            </div>
+
+            <div class="login-tabs">
+                <div class="tab-bg" id="tabBg"></div>
+                <div class="tab-item active" data-target="cabdin">Admin Cabdin IV</div>
+                <div class="tab-item" data-target="sekolah">Admin Sekolah</div>
+            </div>
+
+            <div class="form-container">
+                <div class="forms-slider" id="formsSlider">
+                    <form class="login-form" id="formCabdin">
+                        <div class="form-group">
+                            <label style="font-size:0.9rem; margin-bottom:5px; display:block; font-weight:500;">Username / NIP</label>
+                            <input type="text" class="form-control" placeholder="Masukkan NIP Admin Cabdin">
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size:0.9rem; margin-bottom:5px; display:block; font-weight:500;">Password</label>
+                            <input type="password" class="form-control" placeholder="Masukkan Password">
+                        </div>
+                        <button type="submit" class="btn-primary btn-block">
+                            <i class="fas fa-sign-in-alt"></i> Masuk sebagai Cabdin
+                        </button>
+                    </form>
+
+                    <form class="login-form" id="formSekolah">
+                        <div class="form-group">
+                            <label style="font-size:0.9rem; margin-bottom:5px; display:block; font-weight:500;">NPSN Sekolah</label>
+                            <input type="text" class="form-control" placeholder="Masukkan NPSN Sekolah">
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size:0.9rem; margin-bottom:5px; display:block; font-weight:500;">Password</label>
+                            <input type="password" class="form-control" placeholder="Masukkan Password">
+                        </div>
+                        <button type="submit" class="btn-primary btn-block" style="background: var(--secondary); color: white;">
+                            <i class="fas fa-school"></i> Masuk sebagai Sekolah
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px; font-size: 0.85rem; color: var(--gray);">
+                <p>Lupa password? Hubungi Administrator Pusat.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <div class="footer-text">
+                        <h3>Sistem Informasi Manajemen Mutasi Murid</h3>
+                        <p class="footer-agency">Cabang Dinas Wilayah IV Bangka Barat<br>Provinsi Kepulauan Bangka Belitung</p>
+                    </div>
+                </div>
+                <div class="footer-right">
+                    <div class="social-links">
+                        <a href="#" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                    <div class="copyright">
+                        <p>&copy;Kenji Studio Develover.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // setting jam same tanggal
+        function setCurrentDate() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            document.getElementById('current-date').textContent = 
+                now.toLocaleDateString('id-ID', options);
+        }
+
+        // Animasi dot
+        function animateMovingDots() {
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes dotMove {
+                    0% { opacity: 0; transform: translateX(0); }
+                    50% { opacity: 1; }
+                    100% { opacity: 0; transform: translateX(40px); }
+                }
+                .moving-dot {
+                    animation: dotMove 1.5s infinite;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // fungsi accordeon
+        function initAccordion() {
+            const headers = document.querySelectorAll('.accordion-header');
+            
+            headers.forEach(header => {
+                header.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const isActive = this.classList.contains('active');
+                    
+                    document.querySelectorAll('.accordion-header').forEach(h => {
+                        if (h !== this) {
+                            h.classList.remove('active');
+                            h.nextElementSibling.style.maxHeight = null;
+                        }
+                    });
+
+                    // togel
+                    this.classList.toggle('active');
+                    if (!isActive) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    } else {
+                        content.style.maxHeight = null;
+                    }
+                });
+            });
+        }
+
+        // karusel lagih
+        function initCarousel() {
+            const carousel = document.querySelector('.carousel');
+            const slides = document.querySelectorAll('.carousel-slide');
+            const prevBtn = document.querySelector('.carousel-btn.prev-btn');
+            const nextBtn = document.querySelector('.carousel-btn.next-btn');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            const currentStep = document.getElementById('carousel-current-step');
+            
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+            
+            function updateCarousel() {
+                carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                indicators.forEach((indicator, index) => {
+                    if (index === currentIndex) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+                
+                currentStep.textContent = currentIndex + 1;
+                
+                prevBtn.disabled = currentIndex === 0;
+                nextBtn.disabled = currentIndex === totalSlides - 1;
+            }
+            
+            prevBtn.addEventListener('click', function() {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateCarousel();
+                }
+            });
+            
+            nextBtn.addEventListener('click', function() {
+                if (currentIndex < totalSlides - 1) {
+                    currentIndex++;
+                    updateCarousel();
+                }
+            });
+            
+            indicators.forEach(indicator => {
+                indicator.addEventListener('click', function() {
+                    const slideIndex = parseInt(this.getAttribute('data-slide'));
+                    currentIndex = slideIndex;
+                    updateCarousel();
+                });
+            });
+            
+            // Tambahkan navigasi dengan keyboard
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft') {
+                    prevBtn.click();
+                } else if (e.key === 'ArrowRight') {
+                    nextBtn.click();
+                }
+            });
+            
+            updateCarousel();
+        }
+
+        function initLoginModal() {
+            const loginBtn = document.getElementById('loginBtn');
+            const modal = document.getElementById('loginModal');
+            const closeModal = document.getElementById('closeModal');
+            const tabItems = document.querySelectorAll('.tab-item');
+            const tabBg = document.getElementById('tabBg');
+            const formsSlider = document.getElementById('formsSlider');
+
+            //  Modal buka
+            loginBtn.addEventListener('click', () => {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            });
+
+            //  Modal tutup
+            function hideModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+
+            closeModal.addEventListener('click', hideModal);
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    hideModal();
+                }
+            });
+
+            tabItems.forEach((tab, index) => {
+                tab.addEventListener('click', () => {
+                    tabItems.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    if (index === 0) {
+                        tabBg.style.transform = 'translateX(0)';
+                        formsSlider.style.transform = 'translateX(0)';
+                    } else {
+                        tabBg.style.transform = 'translateX(100%)';
+                        formsSlider.style.transform = 'translateX(-50%)';
+                    }
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setCurrentDate();
+            animateMovingDots();
+            initCarousel(); 
+            initLoginModal(); 
+            initAccordion();
+            
+            const statCards = document.querySelectorAll('.stat-card');
+            statCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            setInterval(setCurrentDate, 60000);
+
+            const ctx = document.getElementById('mutasiChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+                    datasets: [{
+                        label: 'Jumlah Mutasi',
+                        data: [5, 8, 12, 7, 10, 15, 9, 11, 13, 8, 6, 10],
+                        backgroundColor: 'rgba(67, 97, 238, 0.85)',
+                        borderColor: 'rgba(67, 97, 238, 1)',
+                        borderWidth: 2,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: false },
+                        tooltip: {
+                            backgroundColor: '#222',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: '#333',
+                            borderWidth: 1
+                        }
+                    },
+                    layout: {
+                        padding: 10
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Bulan', color: '#fff' },
+                            ticks: { color: '#fff' },
+                            grid: { color: 'rgba(255,255,255,0.1)' }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Jumlah Mutasi', color: '#fff' },
+                            ticks: { color: '#fff' },
+                            grid: { color: 'rgba(255,255,255,0.1)' }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
