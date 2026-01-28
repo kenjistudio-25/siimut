@@ -1083,6 +1083,54 @@
                 font-size: 1rem;
             }
         }
+
+        /* Documents Section */
+        .documents-section {
+            background: #FFDCDC;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+            border: 2px solid #5D4037;
+        }
+
+        .documents-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 15px;
+        }
+
+        .document-item {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            border-left: 4px solid var(--primary);
+            transition: var(--transition);
+        }
+
+        .document-item:hover {
+            transform: translateX(5px);
+            background: #eef2ff;
+            border-color: var(--primary);
+        }
+
+        .document-item i {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .documents-list {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1111,6 +1159,7 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
+                    <img src="logoimut.png" alt="Logo SIIMUT" style="display: block; margin: 0 auto 20px auto; max-width: 150px; border-radius: 50%;">
                     <h2>Kelola Mutasi Siswa dengan Mudah dan Efisien</h2>
                     <p>Sistem terintegrasi untuk mengelola proses perpindahan siswa antar sekolah. Pantau mutasi masuk, keluar, dan pindah.</p>
                     <div class="hero-buttons">
@@ -1300,6 +1349,69 @@
                 <h3 style="margin-bottom:20px;color:var(--light);font-size:1.2rem;">Grafik Mutasi Siswa per Bulan (1 Tahun Terakhir)</h3>
                 <canvas id="mutasiChart" height="100"></canvas>
             </div>
+
+            <!-- Dokumen Pendukung Section -->
+            <section class="documents-section">
+                <h2 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 25px; text-align: center;">Dokumen Pendukung Mutasi Murid</h2>
+                <ul class="documents-list">
+                    <li class="document-item">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Surat Permohonan mutasi dari orangtua/wali peserta didik di atas materai Rp. 10.000,- (sepuluh ribu rupiah) kepada sekolah yang dituju.</span>
+                    </li>
+                    <li class="document-item">
+                        <i class="fas fa-file-contract"></i>
+                        <span>Surat keterangan formasi kepada sekolah yang dituju dan persetujuan akan diterima di sekolah yang dituju.</span>
+                    </li>
+                    <li class="document-item">
+                        <i class="fas fa-file-signature"></i>
+                        <span>Surat pernyataan pengunduran diri/mutasi peserta didik diatas materai Rp. 10.000,- (sepuluh ribu rupiah) yang disampaikan kepada sekolah asal.</span>
+                    </li>
+                    <li class="document-item">
+                        <i class="fas fa-stamp"></i>
+                        <span>Surat keterangan mutasi keluar yang ditandatangani oleh kepala sekolah asal dan diverifikasi, diperiksa serta disetujui kepala cabang dinas.</span>
+                    </li>
+                    <li class="document-item">
+                        <i class="fas fa-book"></i>
+                        <span>Raport asli lengkap dengan photocopy raport yang dilegalisir oleh kepala sekolah.</span>
+                    </li>
+                    <li class="document-item">
+                        <i class="fas fa-certificate"></i>
+                        <span>Photocopy ijazah dari pendidikan sebelumnya yaitu SMP sederajat.</span>
+                    </li>
+                    <li class="document-item">
+                        <i class="fas fa-id-card"></i>
+                        <span>Photocopy akta kelahiran.</span>
+                    </li>
+                    <li class="document-item">
+                        <i class="fas fa-award"></i>
+                        <span>Photocopy sertifikat akreditasi sekolah tujuan.</span>
+                    </li>
+                    <li class="document-item">
+                        <i class="fas fa-building"></i>
+                        <span>Photocopy surat izin operasional sekolah bagi peserta didik yang berasal dari sekolah swasta.</span>
+                    </li>
+                    <li class="document-item">
+                        <i class="fas fa-user-check"></i>
+                        <span>Surat keterangan bahwa peserta didik tidak sedang menjalani sanksi karena melakukan pelanggaran terhadap tata tertib sekolah.</span>
+                    </li>
+                    <li class="document-item">
+                        <i class="fas fa-id-badge"></i>
+                        <span>Photocopy Nomor Induk Siswa Nasional (NISN).</span>
+                    </li>
+                    <li class="document-item">
+                        <i class="fas fa-star"></i>
+                        <span>Photocopy sertifikat akreditasi dari sekolah asal yang memiliki kualifikasi akreditasi sekolah sama.</span>
+                    </li>
+                    <li class="document-item">
+                        <i class="fas fa-university"></i>
+                        <span>Photocopy Nomor Pokok Sekolah Nasional (NPSN).</span>
+                    </li>
+                    <li class="document-item">
+                        <i class="fas fa-users"></i>
+                        <span>Photocopy Kartu Keluarga (KK).</span>
+                    </li>
+                </ul>
+            </section>
 
             <!-- Accordion   Mutasi -->
             <section class="accordion-section">
